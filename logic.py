@@ -1,11 +1,13 @@
 # logic.py
 
 def run_projection(income, expenses, savings, years, income_growth, expense_growth, investment_return):
+    """Year-by-year savings. `income` and `expenses` are MONTHLY figures; growth and return are
+    annual percentages. Each year adds twelve months of surplus."""
     projection = []
     for year in range(years):
         income *= 1 + (income_growth / 100)
         expenses *= 1 + (expense_growth / 100)
-        savings += income - expenses
+        savings += (income - expenses) * 12
         savings *= 1 + (investment_return / 100)
         projection.append(round(savings, 2))
     return projection
